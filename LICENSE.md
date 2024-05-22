@@ -1,0 +1,2 @@
+# IDCWYDWTCBJCMAIYBTPCYSMAPOVBIWTSIAIAGDI License v1.0.0
+#### This software is provide as-is and is licensed under a IDCWYDWTCBJCMAIYBTPCYSMAPOVBIWTSIAIAGDI (I Don't Care What You Do With This Code But Just Credit Me Also If You Build This Project Can You Send Me A Picture Or Video Because I Want To See If Anyone Is Actually Gonna Do It) License. As the name would suggest, I dont care what you do with this code, but just credit me if you use smth from it, and I really want to see if anyone actually makes this because that would be cool

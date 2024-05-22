@@ -9,61 +9,22 @@
 <body>
     <div class="flex flex-col items-center pt-6 w-screen h-screen bg-darkGray">
         <h1 class="text-5xl font-bold text-white">RaspberryPi LED Strip Controller</h1>
+        <div class="flex flex-row justify-center items-center">
+        </div>
       <div class="flex flex-col justify-center items-center pt-6 w-screen h-screen bg-darkGray">
-        <div class="p-6 text-white rounded-md border border-white border-solid bg-darkGray">
-          <ul class='space-y-4'>
-            <li><label for="color" class="text-xl font-bold font-white">Color: <input name="color" type="color"></input></label></li>
-            <li><label for="led" class="text-xl font-bold font-white">LED num: <input class="text-white rounded-md border border-white border-solid max-w-12 bg-darkGray" name="led" type="number"></input></label></li>
-            <li><button onclick="sendColor(lednumState, colorState)" class='px-4 py-2 text-white rounded-md border border-white border-solid outline-none bg-darkGray hover:scale-[1.01] hover:shadow-sm hover:shadow-white active:scale-95'>Send</button></li>
-          </ul>
+        <h1 class="text-xl font-bold text-white">How many NeoPixels are connected? <input class="pl-2 text-white rounded-md border border-white border-solid outline-none caret-white max-w-12 bg-darkGray" name="numPixels" type="number"></input></h1>
+        <div class="p-6 mt-4 text-white rounded-md border border-white border-solid bg-darkGray">
+            <label for="color" class="text-xl font-bold font-white">Color: <input name="color" type="color"></input></label>
+            <label for="led" class="text-xl font-bold font-white">LED num: <input class="pl-2 text-white rounded-md border border-white border-solid outline-none caret-white max-w-12 bg-darkGray" name="led" type="number"></input></label>
+            
+          <div class='flex flex-row gap-4 justify-center items-center mt-4'>
+           <button onclick="sendColor(lednumState, colorState)" class='px-4 py-2 text-white rounded-md border border-white border-solid outline-none bg-darkGray hover:scale-[1.01] hover:shadow-sm hover:shadow-white active:scale-95'>Set</button>
+            <button onclick="setAll(colorState)" class='px-4 py-2 text-white rounded-md border border-white border-solid outline-none bg-darkGray hover:scale-[1.01] hover:shadow-sm hover:shadow-white active:scale-95'>Set All</button>
+            <button onclick="clearColors()" class='px-4 py-2 text-white rounded-md border border-white border-solid outline-none bg-darkGray hover:scale-[1.01] hover:shadow-sm hover:shadow-white active:scale-95'>All Off</button>
+          </div>
         </div>
       </div>
     </div>
-    <script>
-let colorState = hexToRgbObj("#000000");
-let lednumState = 1; 
-
-function hexToRgbObj(hex) {
-    hex = hex.replace('#', '');
-    var r = parseInt(hex.substring(0, 2), 16);
-    var g = parseInt(hex.substring(2, 4), 16);
-    var b = parseInt(hex.substring(4, 6), 16);
-    return {
-        r: r,
-        g: g,
-        b: b
-    };
-}
-
-function sendColor(ledNum, color) {
-    fetch('/led', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "lednum": ledNum, "color": color })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to send data to server');
-        }
-        console.log('Data sent successfully');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
-document.querySelector('input[name="color"]').addEventListener('input', function(event) {
-    colorState = hexToRgbObj(event.target.value);
-});
-
-document.querySelector('input[name="led"]').addEventListener('input', function(event) {
-    lednumState = parseInt(event.target.value);
-});
-
-
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
