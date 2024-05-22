@@ -2,8 +2,9 @@
 control neopixel leds over http from a raspberry pi   
 pretty much just starts an ExpressJS server that recieves a pixel id and rgb data through the body of a POST request to /led
 
-`node index.js` to start   
-serves public/index.html and opens /led endpoint    
+`sudo node index.js` to start   
+serves public/index.html and opens /led endpoint  
+running as root user (sudo) is actually important because the raspberry pi won't allow GPIO access without it    
 
 let port 3000 thru firewall (if ip doest work):
 `sudo firewall-cmd --zone=public --add-port=3000/tcp --permanent`
