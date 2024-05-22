@@ -4,4 +4,7 @@ pretty much just starts an ExpressJS server that recieves a pixel id and rgb dat
 
 `node index.js` to start   
 serves public/index.html and opens /led endpoint    
-script.js is heavily commented for your viewing pleasure (i was bored)
+
+let port 3000 thru firewall (if ip doest work):
+`sudo firewall-cmd --zone=public --add-port=3000/tcp --permanent`
+`sudo firewall-cmd --reload`
