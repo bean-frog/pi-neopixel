@@ -131,4 +131,5 @@ Follow these steps to set up your Raspberry Pi and control NeoPixel LEDs:
   - Remember to include the port number (this will be `:3000` unless you modified the code).
 
 
-
+## Credits
+- Thanks to [bjoerge](https://github.com/bjoerge) for creating [piixel](https://github.com/bjoerge/piixel), a ws281x NodeJS wrapper.
