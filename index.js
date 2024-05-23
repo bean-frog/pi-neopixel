@@ -3,7 +3,13 @@ const express = require('express');
 const path = require('path');
 const os = require("os");
 
-const leds = 36;
+const leds = 35;
+
+function rgbToAnsi(r, g, b) {
+  const colorIndex = 16 + (36 * Math.round(r / 255 * 5)) + (6 * Math.round(g / 255 * 5)) + Math.round(b / 255 * 5);
+  return `\x1b[38;5;${colorIndex}m`;
+}
+
 ws281x.configure(
 	{
 		gpio: 18,
@@ -44,9 +50,15 @@ const port = 3000;
 
 app.use(express.json());
 
+
 app.post('/led', (req, res) => {
   setColor(req.body)
-  console.log('LED ' + req.body.lednum + "set to " + req.body.colors);
+  // BEHOLD! the long ahh log statement of DOOOOOM
+  console.log(rgbToAnsi(255, 255, 255) + 'LED ' + "\x1b[1m" + req.body.lednum + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
+});
+
+app.get("/getPixelCount", (req, res) => {
+  res.send(leds.toString());
 });
 
 app.listen(port, () => {
