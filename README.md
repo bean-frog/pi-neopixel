@@ -1,17 +1,134 @@
-# pi-neopixel
-control neopixel leds over http from a raspberry pi   
-pretty much just starts an ExpressJS server that recieves a pixel id and rgb data through the body of a POST request to /led
 
-## how to use
-- get a Raspberry Pi and install Raspbian. [OFFICAL RPi INSTRUCTIONS](https://www.raspberrypi.com/documentation/computers/getting-started.html).
-- do all the setup/installer stuff, and reboot when prompted.
-- make sure to connect to a wifi network or plug in an ethernet cable.
-- boot up the pi and open a terminal. The default working directory works fine, but you can use `mkdir foldername` and `cd foldername` to make a custom separate one. This is useful if you will be using the Pi for other things too.
-- run `sudo apt-get update` and `sudo apt-get upgrade` to update the Pi.
-- install nodejs and github dependencies: `sudo apt-get install npm gh`.
-- clone repo: `gh repo clone bean-frog/pi-neopixel`.
-- go to directory: `cd pi-neopixel`.
-- install nodejs deps: `npm install`.
-- start the program using `sudo node index.js`.
-    - it is necessary to run this program as a root user (using `sudo`), because the program needs access to the Pi's GPIO pins which is only possible as root.
-- the program will give you an address containing the local IP of the Pi on your network. On any other device with a web browser **that is on the same network**, you can enter this address to access the web GUI. On the Pi's browser itself, you can just use `localhost`. for both of these options, the port (:3000 unless you changed the code) is important and must be included at the end of the address.
+
+# Pi-NeoPixel
+
+
+
+Control NeoPixel LEDs over HTTP from a Raspberry Pi.
+
+
+
+## How to Use
+
+
+
+Follow these steps to set up your Raspberry Pi and control NeoPixel LEDs:
+
+
+
+### 1. Preparing Your Raspberry Pi
+
+- **Get a Raspberry Pi** and install Raspbian. For detailed instructions, refer to the [Official RPi Instructions](https://www.raspberrypi.com/documentation/computers/getting-started.html).
+
+- Complete all the setup/installation steps and reboot when prompted.
+
+
+
+### 2. Network Connection
+
+- **Connect to a Wi-Fi network** or plug in an Ethernet cable.
+
+
+
+### 3. Terminal Setup
+
+- Boot up the Pi and open a terminal. You can use the default working directory or create a custom one for better organization:
+
+  ```sh
+
+  mkdir foldername
+
+  cd foldername
+
+  ```
+
+
+
+### 4. System Update
+
+- **Update your Pi**:
+
+  ```sh
+
+  sudo apt-get update
+
+  sudo apt-get upgrade
+
+  ```
+
+
+
+### 5. Install Dependencies
+
+- **Install Node.js and GitHub CLI**:
+
+  ```sh
+
+  sudo apt-get install npm gh
+
+  ```
+
+
+
+### 6. Clone the Repository
+
+- **Clone the repo**:
+
+  ```sh
+
+  gh repo clone bean-frog/pi-neopixel
+
+  ```
+
+
+
+### 7. Navigate to the Project Directory
+
+- **Go to the directory**:
+
+  ```sh
+
+  cd pi-neopixel
+
+  ```
+
+
+
+### 8. Install Node.js Dependencies
+
+- **Install the necessary packages**:
+
+  ```sh
+
+  npm install
+
+  ```
+
+
+
+### 9. Start the Program
+
+- **Begin the program**:
+
+  ```sh
+
+  sudo node index.js
+
+  ```
+
+  Note: This program requires `sudo` privileges to access the Pi's GPIO pins.
+
+
+
+### 10. Access the Web GUI
+
+- The program will provide an address containing the local IP of the Pi on your network. You can:
+
+  - **On other devices on the same network**: Enter this address in the browser.
+
+  - **On the Pi’s browser**: Use `localhost`.
+
+  - Remember to include the port number (this will be `:3000` unless you modified the code).
+
+
+
