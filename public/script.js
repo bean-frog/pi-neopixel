@@ -1,3 +1,6 @@
+////////////////////////
+// Initializing stuff //
+////////////////////////
 
 let colorState = hexToRgbObj("#000000");
 let lednumState = 1; //the number to target
@@ -9,7 +12,10 @@ getLeds().then((result) => {
     console.error('Error fetching LED data:', error);
 });
 
-//helper functions
+//////////////////////
+// Helper Functions //
+//////////////////////
+
 async function getLeds() {
     try {
         const response = await fetch('/getPixelCount');
@@ -50,7 +56,10 @@ function setAll(color) {
     }
 }
 
-//main functions
+////////////////////
+// Main Functions //
+////////////////////
+
 function sendColor(ledNum, color) {
     fetch('/led', {
         method: 'POST',
@@ -70,7 +79,10 @@ function sendColor(ledNum, color) {
     });
 }
 
-//Event listeners to update states
+/////////////////////
+// Event Listeners //
+/////////////////////
+
 document.querySelector('input[name="color"]').addEventListener('input', function(event) {
     colorState = hexToRgbObj(event.target.value);
 });
