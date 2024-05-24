@@ -44,17 +44,7 @@ function hexToRgbObj(hex) {
     };
 }
 
-function clearColors() {
-    for (let i = 1; i <= pixelNum; i++) {
-        setTimeout(() => sendColor(i, hexToRgbObj("#000000")), i * 10); //timeout is for slight stagger to avoid flooding server    
-    }
-}
 
-function setAll(color) {
-    for (let i = 1; i <= pixelNum; i++) {
-        setTimeout(() => sendColor(i, color), i * 10); //timeout is for slight stagger to avoid flooding server
-    }
-}
 
 ////////////////////
 // Main Functions //
@@ -67,6 +57,25 @@ function sendColor(ledNum, color) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ "lednum": ledNum, "color": color })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to send data to server. server responded with: ' + response);
+        }
+        console.log('Data sent successfully');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function setAll(color) {
+    fetch("/setAll", {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({'color': color})
     })
     .then(response => {
         if (!response.ok) {

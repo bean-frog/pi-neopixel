@@ -3,12 +3,8 @@ const express = require('express');
 const path = require('path');
 const os = require("os");
 
-const leds = 35;
-
-function rgbToAnsi(r, g, b) {
-  const colorIndex = 16 + (36 * Math.round(r / 255 * 5)) + (6 * Math.round(g / 255 * 5)) + Math.round(b / 255 * 5);
-  return `\x1b[38;5;${colorIndex}m`;
-}
+const leds = 35; //number of pixels in strip. this variable is used in both frontend and backend, this is the only place you need to change it.
+const port = 3000;
 
 ws281x.configure(
 	{
@@ -20,22 +16,19 @@ ws281x.configure(
 );
 const pixels = new Uint32Array(leds);
 
-function setColor({ lednum, color }) {
+function rgbToAnsi(r, g, b) {
+  const colorIndex = 16 + (36 * Math.round(r / 255 * 5)) + (6 * Math.round(g / 255 * 5)) + Math.round(b / 255 * 5);
+  return `\x1b[38;5;${colorIndex}m`;
+}
 
+function setColor({ lednum, color }) { //single color function
   const { r, g, b } = color;
-
   if (lednum >= 0 && lednum < leds) {
-
     pixels[lednum] = (r << 8) | (g << 16) | b;
-
     ws281x.render(pixels);
-
   } else {
-
     console.error('LED number out of range');
-
   }
-
 }
 const app = express();
 const publicPath = path.join(__dirname, 'public');
@@ -46,18 +39,26 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-const port = 3000;
-
 app.use(express.json());
-
 
 app.post('/led', (req, res) => {
   setColor(req.body)
   // BEHOLD! the long ahh log statement of DOOOOOM
   console.log(rgbToAnsi(255, 255, 255) + 'LED ' + "\x1b[1m" + req.body.lednum + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
+  res.send(rgbToAnsi(255, 255, 255) + 'LED ' + "\x1b[1m" + req.body.lednum + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
+  
 });
 
-app.get("/getPixelCount", (req, res) => {
+app.post('/setAll', (req, res) => {
+  // BEHOLD! the long ahh log statement of DOOOOOM 2: Electric Boogaloo
+  // TODO: backend handler for this - NOT using setColor if possible
+  let ledrange = "0 - " + leds;
+  console.log(rgbToAnsi(255, 255, 255) + 'LEDs ' + "\x1b[1m" + ledrange + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
+  res.send(rgbToAnsi(255, 255, 255) + 'LEDs ' + "\x1b[1m" + ledrange + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
+  
+});
+
+app.get("/getPixelCount", (req, res) => { //endpoint exposing value of led variable
   res.send(leds.toString());
 });
 
