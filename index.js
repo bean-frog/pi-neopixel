@@ -30,6 +30,7 @@ function setColor({ lednum, color }) { //single color function
     console.error('LED number out of range');
   }
 }
+
 const app = express();
 const publicPath = path.join(__dirname, 'public');
 

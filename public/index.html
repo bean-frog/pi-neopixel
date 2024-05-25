@@ -13,10 +13,10 @@
       <label for="led" class="mr-2">LED Number:</label>
       <input type="number" name="led" id="led" class="px-3 py-2 text-white bg-gray-800 rounded border border-gray-600 max-w-16">
       <label for="color" class="mr-2">Color:</label>
-      <input type="color" name="color" id="color" class="px-3 py-2 text-white bg-gray-800 rounded border border-gray-600">
+      <input type="color" name="color" id="color" class="text-white bg-gray-800 rounded border border-gray-600">
     </div>
     <div class="flex space-x-4">
-      <button onclick="sendColor(lednumState, colorState)" class="hover:scale-[1.01] hover:shadow-md active:scale-95 bg-blue-600 text-white rounded px-4 py-2">Send Color</button>
+      <button onclick="sendColor(lednumState, colorState)" class="hover:scale-[1.01] hover:shadow-lg active:scale-95 bg-blue-600 text-white rounded px-4 py-2">Send Color</button>
       <button onclick="setAll(colorState)" class="hover:scale-[1.01] hover:shadow-md active:scale-95 bg-green-600 text-white rounded px-4 py-2">Set All</button>
       <button onclick="setAll(hexToRgbObj('#000000'))" class="hover:scale-[1.01] hover:shadow-md active:scale-95 bg-red-600 text-white rounded px-4 py-2">Clear Colors</button>
     </div>

@@ -122,13 +122,13 @@ Follow these steps to set up your Raspberry Pi and control NeoPixel LEDs:
 
 ### 10. Access the Web GUI
 
-- The program will provide an address containing the local IP of the Pi on your network. You can:
+- Once started, the program shouls output 3 lines containing the port, local address, and network address. To access the web GUI, you can:
 
-  - **On other devices on the same network**: Enter this address in the browser.
+  - **On other devices on the same network**: Enter the local ip and port (last of the 3 lines).
 
-  - **On the Pi’s browser**: Use `localhost`.
+  - **On the Pi’s browser**: Use the localhost address (second of the 3 lines).
 
-  - Remember to include the port number (this will be `:3000` unless you modified the code).
+  - Remember to include the port number (this will be `:3000` unless you modified the code). If you just copy the URL from the output, it will already be there.
 
 
 ## Credits
