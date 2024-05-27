@@ -20,6 +20,8 @@ Follow these steps to set up your Raspberry Pi and control NeoPixel LEDs:
 
 - **Get a Raspberry Pi** and install Raspberry Pi OS. For detailed instructions, refer to the [Official RPi Instructions](https://www.raspberrypi.com/documentation/computers/getting-started.html).
 
+- The Raspberry Pi Imager will give you several options for which operating system to install. Choose Raspberry Pi OS 64 bit (which should be the first one)
+
 - Complete all the setup/installation steps and reboot when prompted.
 
 
