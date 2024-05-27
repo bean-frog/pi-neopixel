@@ -23,7 +23,7 @@ async function getLeds() {
             throw new Error('Failed to fetch LED data');
         }
         const data = await response.json();
-        document.getElementById("ledNumDisplay").innerHTML = data;
+        document.getElementById("ledNumDisplay").innerHTML = data + " (numbers: 0 - " + (data - 1) + ")";
         return data;
     } catch (error) {
         console.error('Error fetching LED data:', error);
@@ -44,7 +44,11 @@ function hexToRgbObj(hex) {
     };
 }
 
-
+function setAll(color) {
+	for (let i = 0; i <= pixelNum; i++) {
+		sendColor(i, color)
+	}
+}
 
 ////////////////////
 // Main Functions //
@@ -69,24 +73,6 @@ function sendColor(ledNum, color) {
     });
 }
 
-function setAll(color) {
-    fetch("/setAll", {
-        method: "POST",
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify({'color': color})
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to send data to server. server responded with: ' + response);
-        }
-        console.log('Data sent successfully');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
 
 /////////////////////
 // Event Listeners //
