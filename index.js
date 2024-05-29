@@ -1,4 +1,4 @@
-const { StripType, ws281x } = require('piixel');
+const { colorwheel, StripType, ws281x } = require('piixel');
 const express = require('express');
 const path = require('path');
 const os = require("os");
@@ -6,6 +6,8 @@ const os = require("os");
 const leds = 36; //number of pixels in strip. this variable is used in both frontend and backend, this is the only place you need to change it.
 const port = 3000;
 
+//let rainbowloop; //var to store interval for rainbow so we can use clearInterval
+//let rainbowoffset = 0; //offset for rainbow thing
 ws281x.configure(
 	{
 		gpio: 18,
@@ -30,10 +32,15 @@ function setColor({ lednum, color }) { //single color function
     console.error('LED number out of range');
   }
 }
-
-
-
-
+/*
+function rainbow() {
+	  rainbowoffset++
+	  for (let i = 0; i < leds; i++) {
+	    pixels[i] = colorwheel((i * leds + rainbowoffset) % 255)
+	  }
+	  ws281x.render(pixels)
+};
+*/
 const app = express();
 const publicPath = path.join(__dirname, 'public');
 
@@ -46,14 +53,20 @@ app.get('/', (req, res) => {
 app.use(express.json());
 
 app.post('/led', (req, res) => {
+
   setColor(req.body)
   // BEHOLD! the long ahh log statement of DOOOOOM
   console.log(rgbToAnsi(255, 255, 255) + 'LED ' + "\x1b[1m" + req.body.lednum + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
   res.send(rgbToAnsi(255, 255, 255) + 'LED ' + "\x1b[1m" + req.body.lednum + "\x1b[22m" + " set to " + rgbToAnsi(req.body.color.r, req.body.color.g, req.body.color.b) + "(" + req.body.color.r + ", " + req.body.color.g + ", " + req.body.color.b + ")")
   
 });
-
-
+/*
+app.post('/rainbow', (req, res) => {
+  rainbowloop = setInterval(rainbow, 16);
+  console.log("Started rainbow");
+  res.send("Started rainbow");
+});
+*/
 app.get("/getPixelCount", (req, res) => { //endpoint exposing value of led variable
   res.send(leds.toString());
 });

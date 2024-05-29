@@ -72,7 +72,25 @@ function sendColor(ledNum, color) {
         console.error('Error:', error);
     });
 }
-
+/*
+function rainbow() {
+	  fetch('/rainbow', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to send data to server. server responded with: ' + response);
+        }
+        console.log('Data sent successfully');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+*/
 
 /////////////////////
 // Event Listeners //
@@ -90,4 +108,5 @@ document.querySelector('input[name="led"]').addEventListener('input', function(e
     } 
 });
 
+//document.addEventListener('keydown', (e) => { if (e.key === 'n') document.querySelector('.secretshit').classList.toggle('hidden'); });
 
